@@ -5,6 +5,10 @@ import Inicio from "./views/Inicio";
 import Encabezado from "./components/encabezado/Encabezado";
 import Clientes from "./views/Clientes";
 import Productos from "./views/Productos";
+import Categorias from "./views/Categorias";
+import Ventas from "./views/Ventas";
+import Compras from "./views/Compras";
+import Usuarios from "./views/Usuarios";
 import './App.css';
 
 const App = () => {
@@ -17,9 +21,13 @@ const App = () => {
         <Routes>
 
           <Route path="/" element={<Login />} />
-          <Route path="/inicio" element={<Inicio />} />
-          <Route path="/clientes" element={<Clientes />} />
+          <Route path="/inicio" element={<Inicio/>} />
+          <Route path="/clientes" element={<Clientes/>} />
           <Route path="/productos" element={<Productos/>} />
+          <Route path="/categorias" element={<Categorias/>} />
+          <Route path="/ventas" element={<Ventas/>} />
+          <Route path="/compras" element={<Compras/>} />
+          <Route path="/usuarios" element={<Usuarios/>} />
 
         </Routes>
       </main>
