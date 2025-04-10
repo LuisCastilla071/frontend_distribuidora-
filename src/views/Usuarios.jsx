@@ -15,6 +15,9 @@ const Usuarios = () => {
   const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
   const [textoBusqueda, setTextoBusqueda] = useState("");
 
+  const [paginaActual, establecerPaginaActual] = useState(1);
+  const elementosPorPagina = 2; // Número de elementos por página
+
   // Lógica de obtención de datos con useEffect
   useEffect(() => {
     const obtenerUsuarios = async () => { // Método renombrado a español
@@ -39,6 +42,7 @@ const Usuarios = () => {
   const manejarCambioBusqueda = (e) => {
     const texto = e.target.value.toLowerCase();
     setTextoBusqueda(texto);
+    establecerPaginaActual(1);
     
     const filtrados = listaUsuarios.filter(
       (usuario) =>
@@ -47,6 +51,12 @@ const Usuarios = () => {
     );
     setUsuariosFiltrados(filtrados);
   };
+
+  // Calcular elementos paginados
+const empleadosPaginados = usuariosFiltrados.slice(
+  (paginaActual - 1) * elementosPorPagina,
+  paginaActual * elementosPorPagina
+);
 
   // Renderizado de la vista
   return (
@@ -71,10 +81,14 @@ const Usuarios = () => {
 
         {/* Pasa los estados como props al componente TablaCategorias */}
         <TablaUsuarios
-          usuarios={usuariosFiltrados} 
-          cargando={cargando} 
-          error={errorCarga} 
-        />
+    usuarios={empleadosPaginados} 
+    cargando={cargando} 
+    error={errorCarga}
+    totalElementos={usuariosFiltrados.length} // Total de elementos
+    elementosPorPagina={elementosPorPagina} // Elementos por página
+    paginaActual={paginaActual} // Página actual
+    establecerPaginaActual={establecerPaginaActual} // Método para cambiar página
+  />
       </Container>
     </>
   );
